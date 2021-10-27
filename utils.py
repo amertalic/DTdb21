@@ -1,5 +1,11 @@
 import datetime
 
+# date patterns for strings
+date_patterns = [
+    "%d-%m-%Y", "%d-%m-%y", "%Y-%m-%d", "%y-%m-%d", "%Y-%d-%m",
+    "%d.%m.%Y", "%d.%m.%y", "%Y.%m.%d", "%y.%m.%d", "%Y-%d-%m"
+]
+
 
 # date cleaner function
 def date_cleaner(date):
@@ -15,4 +21,11 @@ def date_cleaner(date):
     elif isinstance(date, datetime.date) is True:
         return date
     elif isinstance(date, str) is True:
-        return datetime.datetime.strptime(date, '%Y-%m-%d').date()
+        for pattern in date_patterns:
+            try:
+                date = datetime.datetime.strptime(date, pattern)
+                return date.date()
+            except:
+                assert "Date is not in expected format: %s" % (date)
+    else:
+        assert 'Does not WORK'
