@@ -33,15 +33,18 @@ key_excel_list = ['clinic', 'nb_month', 'surgery_date', 'release_date',
 row_dict = {}
 
 # gets values from extracted excel row and puts them to the correspondent
+
 def extract_row_values():
+    # range (5,6): takes the row between = row 5 only!
     for row in range(5, 6):
         for i in range(25):
-            row_dict[key_excel_list[i]] = ws[get_column_letter(i+1) + str(row)].value
+            row_dict[key_excel_list[i]] = ws[get_column_letter(i + 1) + str(row)].value
     return row_dict
+
 
 # runs function for extraction of values from a row in excel file
 extract_row_values()
 # runs function for date cleaning: surgery_date
 print(date_cleaner(row_dict['surgery_date']))
 # runs function for date cleaning: release_date
-date_cleaner(row_dict['release_date'])
+print(date_cleaner(row_dict['release_date']))
