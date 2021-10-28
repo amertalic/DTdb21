@@ -13,8 +13,9 @@ dmy = [
     '%d-%B-%Y', '%d-%B-%y',
     '%Y-%B-%d', '%y-%B-%d'
 ]
-# loops through the combinations of days, months and years
+# loops through the combinations of days, months and years to get different patterns
 for date_pat in dmy:
+    # loops through '.,-/ ' to combine them as connectors between d m y
     for char in character_connectors:
         date_1 = (date_pat.replace('-', char))
         # if/esle swaps day and month
@@ -29,7 +30,9 @@ for date_pat in dmy:
         date_patterns.insert(0, date_1)
         # it is a small possibility, but still possible that the date sequence is m-d-y or y-d-m, there for its appended at the end.
         date_patterns.append(date_2)
-print(date_patterns)
+
+# print date patterns created above
+# print(date_patterns)
 
 
 # date cleaner function
