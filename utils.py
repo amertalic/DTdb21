@@ -57,3 +57,6 @@ def date_cleaner(date):
                 assert "Date is not in expected format: %s" % (date)
     else:
         assert 'Does not WORK, date is not predicted, go to date_cleaner()'
+
+
+# TODO create function to compare dates. If stray dog surgery_date and 'release_date' are not the same as for the owned dogs
