@@ -17,5 +17,5 @@ def date_fromat_tester():
 
 # date_fromat_tester()
 
-# TODO compare prevoiusly extracted dates to compare
+# TODO compare previously extracted dates to compare
 # for example: '10-11-09', all three number could be a y,m and d.
