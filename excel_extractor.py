@@ -32,7 +32,7 @@ key_excel_list = ['clinic', 'nb_month', 'surgery_date', 'release_date',
 # dictionary where keys will be inserted
 row_dict = {}
 
-# gets values from extracted excel row and puts them to the correspondnt
+# gets values from extracted excel row and puts them to the correspondent
 def extract_row_values():
     for row in range(5, 6):
         for i in range(25):
