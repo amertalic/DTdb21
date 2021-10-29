@@ -11,17 +11,12 @@ from utils import capitalize_string, title_string
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
 ws = wb.active
 
-# print value from a specific cell
-print(ws['A1'].value)
-print(ws['A2'].value)
-print(ws['A3'].value)
-print(ws['A4'].value)
-print(ws['A5'].value)
-
 # prints all sheets in excel file
 print(wb.sheetnames)
 # TODO print length of sheets
 # TODO check which sheet is the correct one
+
+
 
 # excel column names_keys
 key_excel_list = ['clinic', 'nb_month', 'surgery_date', 'release_date',
@@ -36,7 +31,6 @@ row_dict = {}
 
 
 # gets values from extracted excel row and puts them to the correspondent
-
 def extract_row_values():
     # range (5,6): takes the row between = row 5 only!
     for row in range(5, 6):
@@ -52,13 +46,8 @@ row_dict['surgery_date'] = date_cleaner(row_dict['surgery_date'])
 # runs function for date cleaning: release_date
 row_dict['release_date'] = date_cleaner(row_dict['release_date'])
 
-# TEST PRINT
-print(row_dict)
-print(type(row_dict['surgery_date']))
-
-
 # capitalize word in a string
-for key in ['owner_name','dog_name','catcher','feeder','rabies_vaccine', 'owner_address']:
+for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'owner_address']:
     if row_dict[key] != None:
         if key == 'owner_address':
             # capitalize only first word
@@ -67,9 +56,13 @@ for key in ['owner_name','dog_name','catcher','feeder','rabies_vaccine', 'owner_
             # capitalize all words
             row_dict[key] = title_string(row_dict[key])
 
-
-
+# TEST PRINT
+print(row_dict)
+print(type(row_dict['surgery_date']))
 print(row_dict['owner_address'])
 print(row_dict['owner_name'])
 print(row_dict['catcher'])
 
+# TODO make all excel files not which have not the first row with date in the 5th row recognizeble and adjusted
+# print value from a specific cell test correct row access
+print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
