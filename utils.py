@@ -60,3 +60,15 @@ def date_cleaner(date):
 
 
 # TODO create function to compare dates. If stray dog surgery_date and 'release_date' are not the same as for the owned dogs
+
+
+# function returns capitalized first letter for first word in a string
+# for example address
+def capitalize_string(string):
+    return string.capitalize()
+
+
+# for example: dog name, owner name, vet name, catcher name
+# function returns capitalized first letter for all words in a string
+def title_string(string):
+    return string.title()
