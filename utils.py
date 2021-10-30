@@ -31,6 +31,7 @@ for date_pat in dmy:
         # it is a small possibility, but still possible that the date sequence is m-d-y or y-d-m, there for its appended at the end.
         date_patterns.append(date_2)
 
+
 # print date patterns created above
 # print(date_patterns)
 
@@ -75,11 +76,26 @@ def capitalize_string(string):
 def title_string(string):
     return string.title()
 
-def microchip_cleaner(microchip):
-    microchip = str(microchip)
+# function returns a 15 digit long string
+# microchip number in Eurpe is 15 digit long
+def microchip_cleaner(mchip):
+    microchip = str(mchip)
+
+    # usually microchip starts with 0
     while len(microchip) != 15:
         if len(microchip) < 15:
             microchip = str(0) + microchip
         else:
             assert 'microchip number is too long'
     return microchip
+
+
+def weight_cleaner(wght):
+    weight = str(wght).lower()
+    if ',' in weight:
+        weight = weight.replace(',', '.')
+    for char in 'abcdefghijklmnopqrstuvwxyzqxšđžćč ':
+        if char in weight.lower():
+            weight = weight.lower().replace(char, '')
+    print('debug', weight, type(weight))
+    return float(weight)
