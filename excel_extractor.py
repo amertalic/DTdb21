@@ -8,7 +8,7 @@ from utils import date_cleaner
 from utils import capitalize_string, title_string
 # import function to clean the microchip number
 from utils import microchip_cleaner
-# import function to clean weight and fetal number number
+# import function to clean weight, fetal number and nb_month
 from utils import weight_cleaner
 
 # accessing excel
@@ -67,7 +67,10 @@ row_dict['weight'] = weight_cleaner(row_dict['weight'])
 # if number of fetuses is not null than converts the number to a float
 if row_dict['fetal_number'] != None:
     row_dict['fetal_number'] = weight_cleaner(row_dict['fetal_number'])
-
+# TODO number_month: so it has to start when a document is opened with the first monday in the month
+#  or i onther cases where the months started.
+#  It is probably to do it when we have all inserted in the SQL and than sort  it out.
+row_dict['nb_month'] = weight_cleaner(row_dict['nb_month'])
 
 # TEST PRINT
 # print(row_dict)
@@ -83,3 +86,8 @@ if row_dict['fetal_number'] != None:
 print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
 print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
       len(str(row_dict['microchip'])))
+
+
+
+
+
