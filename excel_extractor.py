@@ -8,6 +8,8 @@ from utils import date_cleaner
 from utils import capitalize_string, title_string
 # import function to clean the microchip number
 from utils import microchip_cleaner
+# import function to clean weight and fetal number number
+from utils import weight_cleaner
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -60,6 +62,13 @@ for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'ow
 # adjust 15 digit microchip number and convert it to string
 row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
 
+# cleans weight to float output
+row_dict['weight'] = weight_cleaner(row_dict['weight'])
+# if number of fetuses is not null than converts the number to a float
+if row_dict['fetal_number'] != None:
+    row_dict['fetal_number'] = weight_cleaner(row_dict['fetal_number'])
+
+
 # TEST PRINT
 # print(row_dict)
 # print(type(row_dict['surgery_date']))
@@ -72,5 +81,5 @@ row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
 # print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
 
 print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
-print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'lenght:',
+print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
       len(str(row_dict['microchip'])))
