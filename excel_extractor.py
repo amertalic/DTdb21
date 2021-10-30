@@ -67,13 +67,15 @@ row_dict['weight'] = weight_cleaner(row_dict['weight'])
 # if number of fetuses is not null than converts the number to a float
 if row_dict['fetal_number'] != None:
     row_dict['fetal_number'] = weight_cleaner(row_dict['fetal_number'])
+
 # TODO number_month: so it has to start when a document is opened with the first monday in the month
 #  or i onther cases where the months started.
 #  It is probably to do it when we have all inserted in the SQL and than sort  it out.
+# get a number in return
 row_dict['nb_month'] = weight_cleaner(row_dict['nb_month'])
 
 # TEST PRINT
-# print(row_dict)
+print(row_dict)
 # print(type(row_dict['surgery_date']))
 # print(row_dict['owner_address'])
 # print(row_dict['owner_name'])
