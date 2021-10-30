@@ -14,10 +14,9 @@ wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
 ws = wb.active
 
 # prints all sheets in excel file
-print(wb.sheetnames)
+print('SHEET NAMES IN EXCEL:\n', wb.sheetnames)
 # TODO print length of sheets
 # TODO check which sheet is the correct one
-
 
 
 # excel column names_keys
@@ -62,15 +61,16 @@ for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'ow
 row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
 
 # TEST PRINT
-print(row_dict)
-print(type(row_dict['surgery_date']))
-print(row_dict['owner_address'])
-print(row_dict['owner_name'])
-print(row_dict['catcher'])
+# print(row_dict)
+# print(type(row_dict['surgery_date']))
+# print(row_dict['owner_address'])
+# print(row_dict['owner_name'])
+# print(row_dict['catcher'])
 
 # TODO make all excel files not which have not the first row with date in the 5th row recognizeble and adjusted
 # print value from a specific cell test correct row access
-print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
+# print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
 
-print(row_dict['weight'], type(row_dict['weight']))
-print(row_dict['microchip'], type(row_dict['microchip']),len(str(row_dict['microchip'])))
+print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
+print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'lenght:',
+      len(str(row_dict['microchip'])))
