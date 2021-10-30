@@ -76,17 +76,23 @@ def capitalize_string(string):
 def title_string(string):
     return string.title()
 
+
 # function returns a 15 digit long string
 # microchip number in Eurpe is 15 digit long
 def microchip_cleaner(mchip):
     microchip = str(mchip)
-
+    for char in 'abcdefghijklmnopqrstuvwxyzqxšđžćč,.()/*; ':
+        if char in microchip.lower():
+            microchip = microchip.lower().replace(char, '')
     # usually microchip starts with 0
     while len(microchip) != 15:
         if len(microchip) < 15:
             microchip = str(0) + microchip
         else:
-            assert 'microchip number is too long'
+            # this means that the microchip is longer than 15 characters
+            # TODO get these examples(into a sheet written appended and saved) and figure out what to do with them
+            # long_microchips.append(microchip)
+            return microchip
     return microchip
 
 
