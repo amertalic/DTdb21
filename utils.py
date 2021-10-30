@@ -60,7 +60,9 @@ def date_cleaner(date):
 
 
 # TODO create function to compare dates. If stray dog surgery_date and 'release_date' are not the same as for the owned dogs
-
+# TODO create a function that separates owner_address
+#  in streat name, pops br. broj etc., and separates streat number and if availbele post code.
+#  Maybe create a cpolumn for city/municipilty which is known beceause of the vet clinic.
 
 # function returns capitalized first letter for first word in a string
 # for example address
@@ -72,3 +74,12 @@ def capitalize_string(string):
 # function returns capitalized first letter for all words in a string
 def title_string(string):
     return string.title()
+
+def microchip_cleaner(microchip):
+    microchip = str(microchip)
+    while len(microchip) != 15:
+        if len(microchip) < 15:
+            microchip = str(0) + microchip
+        else:
+            assert 'microchip number is too long'
+    return microchip

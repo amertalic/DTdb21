@@ -6,6 +6,8 @@ from openpyxl.utils import get_column_letter
 from utils import date_cleaner
 # import function for capitalizing
 from utils import capitalize_string, title_string
+# import function to clean the microchip number
+from utils import microchip_cleaner
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -56,6 +58,9 @@ for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'ow
             # capitalize all words
             row_dict[key] = title_string(row_dict[key])
 
+# adjust 15 digit microchip number and convert it to string
+row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
+
 # TEST PRINT
 print(row_dict)
 print(type(row_dict['surgery_date']))
@@ -66,3 +71,6 @@ print(row_dict['catcher'])
 # TODO make all excel files not which have not the first row with date in the 5th row recognizeble and adjusted
 # print value from a specific cell test correct row access
 print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
+
+print(row_dict['weight'], type(row_dict['weight']))
+print(row_dict['microchip'], type(row_dict['microchip']),len(str(row_dict['microchip'])))
