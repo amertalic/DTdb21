@@ -10,6 +10,8 @@ from utils import capitalize_string, title_string
 from utils import microchip_cleaner
 # import function to clean weight, fetal number and nb_month
 from utils import weight_cleaner
+# import function to clean sex
+from utils import sex_cleaner
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -73,6 +75,9 @@ if row_dict['fetal_number'] != None:
 #  It is probably to do it when we have all inserted in the SQL and than sort  it out.
 # get a number in return
 row_dict['nb_month'] = weight_cleaner(row_dict['nb_month'])
+
+# clean sex, and return
+row_dict['sex'] = sex_cleaner(row_dict['sex'])
 
 # TEST PRINT
 print(row_dict)

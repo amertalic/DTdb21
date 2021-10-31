@@ -106,7 +106,17 @@ def weight_cleaner(wght):
     print('debug', weight, type(weight))
     return float(weight)
 
+
 # this function appends excel spreadsheet in debug outputs when an not implemented format appears
 # TODO define what fields should this sheet have (vet clinic, name and date of origin excel, key_name and type
 def debug_outputs():
     pass
+
+# this function returns 'M' for males and 'F' for females.
+def sex_cleaner(s):
+    if s.upper() in ['M', 'MALE', 'MUSKO', 'MUZJAK', 'MUZIJAK', 'MUŠKO', 'MUŽJAK', 'MUŽIJAK']:
+        return 'M'
+    elif s.upper() in ['Ž', 'Z', 'ZENSKO', 'ŽENSKO', 'F', 'FEMALE', 'FEM']:
+        return 'F'
+    else:
+        assert 'not implemented sex'
