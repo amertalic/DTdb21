@@ -77,6 +77,13 @@ def capitalize_string(string):
 def title_string(string):
     return string.title()
 
+# function that separates surname and name
+def name_seprator(surname_name):
+    lst = surname_name.split()
+    for char in ['ic', 'ić']:
+        if char in lst[1][-2:]:
+            surname = lst[1]
+            name = lst[0]
 
 # function returns a 15 digit long string
 # microchip number in Eurpe is 15 digit long
@@ -149,3 +156,5 @@ def translate(text):
     else:
         translation = translators.google(text, from_language='bs', to_language='en')
     return translation
+
+
