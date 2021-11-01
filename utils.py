@@ -120,3 +120,20 @@ def sex_cleaner(s):
         return 'F'
     else:
         assert 'not implemented sex'
+
+# convert age to date (birthdate)
+def age_birthdate_convcerter(age, surgery_date):
+    '''
+
+    :param age: grown dog, 2 years 6 months etc.
+    :param surgery_date: as date object
+    :return: birthdate (date object) and age (float)
+    '''
+    print(age, type(age))
+    if str(age).lower() in ['odrastao', 'odrasto']:
+        return 'unknown', 'grown'
+    elif (isinstance(age, float) or isinstance(age, int)) == True:
+        return surgery_date - datetime.timedelta(age*365), age
+    else:
+        print('DEBUG: check age input form excel')
+        return 'unknown', 'grown'

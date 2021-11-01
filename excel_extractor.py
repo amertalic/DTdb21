@@ -1,4 +1,6 @@
 # Program extracting first column
+import datetime
+
 import openpyxl
 # Import letters for columns
 from openpyxl.utils import get_column_letter
@@ -12,6 +14,8 @@ from utils import microchip_cleaner
 from utils import weight_cleaner
 # import function to clean sex
 from utils import sex_cleaner
+# import age to birthdate converter and cleaner
+from utils import age_birthdate_convcerter
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -79,6 +83,11 @@ row_dict['nb_month'] = weight_cleaner(row_dict['nb_month'])
 # clean sex, and return
 row_dict['sex'] = sex_cleaner(row_dict['sex'])
 
+# convert age to birthdate
+# get two outputs birthdate and age
+# if age not spcefied returns unknown for birthdate and grown for age
+row_dict['birthdate'], row_dict['age'] = age_birthdate_convcerter(row_dict['birthdate'], row_dict['surgery_date'])
+
 # TEST PRINT
 print(row_dict)
 # print(type(row_dict['surgery_date']))
@@ -86,15 +95,13 @@ print(row_dict)
 # print(row_dict['owner_name'])
 # print(row_dict['catcher'])
 
-# TODO make all excel files not which have not the first row with date in the 5th row recognizeble and adjusted
+# TODO recognize which is the first row in excel file to be extracted (usually its the 5t row)
 # print value from a specific cell test correct row access
 # print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
 
 print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
 print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
       len(str(row_dict['microchip'])))
-
-
 
 
 
