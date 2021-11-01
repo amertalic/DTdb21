@@ -85,7 +85,7 @@ row_dict['sex'] = sex_cleaner(row_dict['sex'])
 
 # convert age to birthdate
 # get two outputs birthdate and age
-# if age not spcefied returns unknown for birthdate and grown for age
+# if age not specified returns unknown for birthdate and grown for age
 row_dict['birthdate'], row_dict['age'] = age_birthdate_convcerter(row_dict['birthdate'], row_dict['surgery_date'])
 
 # TEST PRINT
