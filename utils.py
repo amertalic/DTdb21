@@ -1,4 +1,5 @@
 import datetime
+import translators
 
 # date patterns for strings
 # combinens separation chaarcters with d,m,y,Y,b,B combinations
@@ -112,6 +113,7 @@ def weight_cleaner(wght):
 def debug_outputs():
     pass
 
+
 # this function returns 'M' for males and 'F' for females.
 def sex_cleaner(s):
     if s.upper() in ['M', 'MALE', 'MUSKO', 'MUZJAK', 'MUZIJAK', 'MUŠKO', 'MUŽJAK', 'MUŽIJAK']:
@@ -120,6 +122,7 @@ def sex_cleaner(s):
         return 'F'
     else:
         assert 'not implemented sex'
+
 
 # convert age to date (birthdate)
 def age_birthdate_convcerter(age, surgery_date):
@@ -133,7 +136,16 @@ def age_birthdate_convcerter(age, surgery_date):
     if str(age).lower() in ['odrastao', 'odrasto']:
         return 'unknown', 'grown'
     elif (isinstance(age, float) or isinstance(age, int)) == True:
-        return surgery_date - datetime.timedelta(age*365), age
+        return surgery_date - datetime.timedelta(age * 365), age
     else:
         print('DEBUG: check age input form excel')
         return 'unknown', 'grown'
+
+
+# google translate tool from Bosnian to english
+def translate(text):
+    if text.lower() in ['no', 'ne']:
+        translation = 'Not pregnant'
+    else:
+        translation = translators.google(text, from_language='bs', to_language='en')
+    return translation

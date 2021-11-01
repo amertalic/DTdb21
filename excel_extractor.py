@@ -1,6 +1,3 @@
-# Program extracting first column
-import datetime
-
 import openpyxl
 # Import letters for columns
 from openpyxl.utils import get_column_letter
@@ -16,6 +13,8 @@ from utils import weight_cleaner
 from utils import sex_cleaner
 # import age to birthdate converter and cleaner
 from utils import age_birthdate_convcerter
+# import translator
+from utils import translate
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -48,8 +47,17 @@ def extract_row_values():
     return row_dict
 
 
+
+
 # runs function for extraction of values from a row in excel file
 extract_row_values()
+
+
+# translate these keys into english from bosnian
+for key in ['advert', 'pregnancy', 'complications', 'comments','coat']:
+    if row_dict[key] != None:
+        row_dict[key] = translate(row_dict[key])
+
 # runs function for date cleaning: surgery_date
 row_dict['surgery_date'] = date_cleaner(row_dict['surgery_date'])
 # runs function for date cleaning: release_date
@@ -86,6 +94,7 @@ row_dict['sex'] = sex_cleaner(row_dict['sex'])
 # convert age to birthdate
 # get two outputs birthdate and age
 # if age not specified returns unknown for birthdate and grown for age
+# the dictionary will get a new key:field row_dict['age']
 row_dict['birthdate'], row_dict['age'] = age_birthdate_convcerter(row_dict['birthdate'], row_dict['surgery_date'])
 
 # TEST PRINT
@@ -102,6 +111,3 @@ print(row_dict)
 print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
 print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
       len(str(row_dict['microchip'])))
-
-
-
