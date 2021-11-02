@@ -34,23 +34,34 @@ print(prezime)
 
 
 # cleans the top lists above of names and surnames
+for ns in [names, surnames]:
+    clean = []
+    for word in ns:
+        # remove surnames that end with ic and ić
+        if word[-2:].lower() == ('ić' or 'ic'):
+            continue
+        else:
+            # capitalize first letter
+            clean.append(word.title())
 
-surname_clean = []
-for surname in names:
-    # remove surnames that end with ic and ić
-    if surname[-2:].lower() == ('ić' or 'ic'):
-        continue
+    # insert the list to the set
+    clean = set(clean)
+    # convert the set to the list
+    clean = (list(clean))
+    # sort ABC
+    clean = sorted(clean)
+    # get the print
+    if ns == names:
+        # open a (new) file to write (not append)
+        outF = open("names_clean.txt", "w")
+        for n in clean:
+            outF.write(n)
+            outF.write('\n')
     else:
-        # capitalize first letter
-        surname_clean.append(surname.title())
+        # open a (new) file to write (not append)
+        outF = open("surnames_clean.txt", "w")
+        for n in clean:
+            outF.write(n)
+            outF.write('\n')
 
-# insert the list to the set
-list_set = set(surname_clean)
-# convert the set to the list
-unique_list = (list(list_set))
-# sort ABC
-sorted_lst = sorted(unique_list)
-# get the print
-print(len(sorted_lst))
-print(sorted_lst)
 
