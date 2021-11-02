@@ -1,3 +1,5 @@
+Abdulah
+Abdusamed
 Adam
 Adela
 Adelisa
@@ -664,6 +666,7 @@ Vladimir
 Vujoš
 Vuk
 Vukašin
+Xxx
 Zara
 Zdravko
 Zehra
