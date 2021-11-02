@@ -33,9 +33,19 @@ print(ime)
 print(prezime)
 
 
+nc_lst = []
+# open clean names and surnames, put data into a list to be compared
+with open('names_clean.txt', 'r') as nc:
+    for row in nc:
+        row = row.replace('\n','')
+        nc_lst.append(row)
+
+nc_lst
+
 # cleans the top lists above of names and surnames
 for ns in [names, surnames]:
     clean = []
+
     for word in ns:
         # remove surnames that end with ic and ić
         if word[-2:].lower() == ('ić' or 'ic'):
@@ -55,8 +65,11 @@ for ns in [names, surnames]:
         # open a (new) file to write (not append)
         outF = open("names_clean.txt", "w")
         for n in clean:
-            outF.write(n)
-            outF.write('\n')
+            if n in nc_lst:
+                continue
+            else:
+                outF.write(n)
+                outF.write('\n')
         outF.close()
     else:
         # open a (new) file to write (not append)
