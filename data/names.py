@@ -57,11 +57,13 @@ for ns in [names, surnames]:
         for n in clean:
             outF.write(n)
             outF.write('\n')
+        outF.close()
     else:
         # open a (new) file to write (not append)
         outF = open("surnames_clean.txt", "w")
         for n in clean:
             outF.write(n)
             outF.write('\n')
+        outF.close()
 
 
