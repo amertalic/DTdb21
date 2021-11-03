@@ -7,25 +7,7 @@
 from raw_names import names
 from raw_surnames import surnames
 
-# paste names (str). NOTE must be an even number when split
-str = ''' '''
-# string becomes a list
-lst = str.split()
-print(len(lst))
 
-# initialize 2 output lists
-ime = []
-prezime = []
-# loops throu the list and separates names and surnames
-# because its names as even numbers and surnames as odd numbers and vise versa
-while lst != []:
-    i = lst.pop(0)
-    ime.append(i)
-    p = lst.pop(0)
-    prezime.append(p)
-
-print(ime)
-print(prezime)
 
 nc_lst = []
 # open clean names and surnames, put data into a list to be compared
