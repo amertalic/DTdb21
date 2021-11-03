@@ -138,7 +138,7 @@ def sex_cleaner(s):
     elif s.upper() in ['Ž', 'Z', 'ZENSKO', 'ŽENSKO', 'F', 'FEMALE', 'FEM']:
         return 'F'
     else:
-        assert 'not implemented sex'
+        return s.upper()
 
 
 # convert age to date (birthdate)
