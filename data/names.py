@@ -2,7 +2,8 @@
 # These names and surnames will be useful to separate names and surnames
 # from from fields where names and surnames are together.
 
-import csv
+import os.path
+
 # import lists with new pasted names
 from data.raw_names import names
 from data.raw_surnames import surnames
@@ -16,9 +17,14 @@ def open_txt_r(txt):
             lst.append(row)
         return lst
 
+
+
+
 # open clean names and surnames, put data into a list to be compared
-nc_lst = open_txt_r('data/names_clean.txt')
-sc_lst = open_txt_r('data/surnames_clean.txt')
+# Windows & ubuntu
+nc_lst = open_txt_r(os.path.join("names_clean.txt"))
+sc_lst = open_txt_r(os.path.join("surnames_clean.txt"))
+
 
 # cleans the top lists above of names and surnames
 for ns in [names, surnames]:

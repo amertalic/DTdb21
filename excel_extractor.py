@@ -47,14 +47,13 @@ def extract_row_values():
     return row_dict
 
 
-
-
 # runs function for extraction of values from a row in excel file
 extract_row_values()
 
 
+
 # translate these keys into english from bosnian
-for key in ['advert', 'pregnancy', 'complications', 'comments','coat']:
+for key in ['advert', 'pregnancy', 'complications', 'comments', 'coat']:
     if row_dict[key] != None:
         row_dict[key] = translate(row_dict[key])
 

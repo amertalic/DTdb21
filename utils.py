@@ -81,6 +81,8 @@ def title_string(string):
 
 # function that separates surname and name
 def name_seprator(surname_name):
+    nc_lst = open_txt_r('names_clean.txt')
+    sc_lst = open_txt_r('surnames_clean.txt')
     lst = surname_name.split()
     for char in ['ic', 'ić']:
         if char in lst[1][-2:] and len(lst) == 2:
@@ -88,11 +90,19 @@ def name_seprator(surname_name):
             name = lst[0]
         elif char in lst[1][-2:] and len(lst) == 3:
             surname = lst[-2:]
-            name = name = lst[0]
+            name = lst[0]
+            if lst[1] in nc_lst:
+                name += lst[1]
+            elif lst[1] in sc_lst:
+                surname = lst[1:]
+            else:
+                name = lst[:2]
+                surname = [-1]
+        else:
+            pass
 
             # open txt files and create name and surname lists
-    nc_lst = open_txt_r('names_clean.txt')
-    sc_lst = open_txt_r('surnames_clean.txt')
+
 
 
 # function returns a 15 digit long string
@@ -121,7 +131,6 @@ def weight_cleaner(wght):
     for char in 'abcdefghijklmnopqrstuvwxyzqxšđžćč ':
         if char in weight.lower():
             weight = weight.lower().replace(char, '')
-    print('debug', weight, type(weight))
     return float(weight)
 
 
@@ -149,7 +158,6 @@ def age_birthdate_convcerter(age, surgery_date):
     :param surgery_date: as date object
     :return: birthdate (date object) and age (float)
     '''
-    print(age, type(age))
     if str(age).lower() in ['odrastao', 'odrasto']:
         return 'unknown', 'grown'
     elif (isinstance(age, float) or isinstance(age, int)) == True:
