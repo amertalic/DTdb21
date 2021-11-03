@@ -1,5 +1,6 @@
 import datetime
 import translators
+from data.names import open_txt_r
 
 # date patterns for strings
 # combinens separation chaarcters with d,m,y,Y,b,B combinations
@@ -77,13 +78,22 @@ def capitalize_string(string):
 def title_string(string):
     return string.title()
 
+
 # function that separates surname and name
 def name_seprator(surname_name):
     lst = surname_name.split()
     for char in ['ic', 'ić']:
-        if char in lst[1][-2:]:
+        if char in lst[1][-2:] and len(lst) == 2:
             surname = lst[1]
             name = lst[0]
+        elif char in lst[1][-2:] and len(lst) == 3:
+            surname = lst[-2:]
+            name = name = lst[0]
+
+            # open txt files and create name and surname lists
+    nc_lst = open_txt_r('names_clean.txt')
+    sc_lst = open_txt_r('surnames_clean.txt')
+
 
 # function returns a 15 digit long string
 # microchip number in Eurpe is 15 digit long
@@ -156,5 +166,3 @@ def translate(text):
     else:
         translation = translators.google(text, from_language='bs', to_language='en')
     return translation
-
-

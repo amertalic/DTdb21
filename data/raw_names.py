@@ -1,2 +1,2 @@
 # paste names
-names = ['Beisa', 'Dina']
+names = ['Omer', 'Osman', 'Alija', 'Milan', 'Ali']

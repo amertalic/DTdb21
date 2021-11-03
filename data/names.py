@@ -8,20 +8,17 @@ from raw_names import names
 from raw_surnames import surnames
 
 
+def open_txt_r(txt):
+    lst = []
+    with open(txt, 'r', encoding='utf-8') as nc:
+        for row in nc:
+            row = row.replace('\n', '')
+            lst.append(row)
+        return lst
 
-nc_lst = []
 # open clean names and surnames, put data into a list to be compared
-with open('names_clean.txt', 'r', encoding='utf-8') as nc:
-    for row in nc:
-        row = row.replace('\n', '')
-        nc_lst.append(row)
-
-sc_lst = []
-# open clean names and surnames, put data into a list to be compared
-with open('surnames_clean.txt', 'r', encoding='utf-8') as sc:
-    for row in sc:
-        row = row.replace('\n', '')
-        sc_lst.append(row)
+nc_lst = open_txt_r('names_clean.txt')
+sc_lst = open_txt_r('surnames_clean.txt')
 
 # cleans the top lists above of names and surnames
 for ns in [names, surnames]:
