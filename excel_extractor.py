@@ -89,7 +89,7 @@ if row_dict['fetal_number'] != None:
 #  or i onther cases where the months started.
 #  It is probably to do it when we have all inserted in the SQL and than sort  it out.
 # get a number in return
-row_dict['nb_month'] = weight_cleaner(row_dict['nb_month'])
+row_dict['nb_month'] = int(weight_cleaner(row_dict['nb_month']))
 
 # clean sex, and return
 row_dict['sex'] = sex_cleaner(row_dict['sex'])

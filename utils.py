@@ -84,51 +84,22 @@ def name_seprator(surname_name):
     nc_lst = open_txt_r('names_clean.txt')
     sc_lst = open_txt_r('surnames_clean.txt')
     lst = surname_name.split()
-    name = ''
-    surname = ''
-    for n in ['ic', 'ić']:
-        if n in lst[1][-2:] and len(lst) == 2:
-            surname = lst[1]
-            name = lst[0]
-        elif n in lst[1][-2:] and len(lst) == 3:
-            surname = lst[-2] + lst[-1]
-            name = lst[0]
-        else:
-            for n in lst:
-                if n in nc_lst:
-                    if name != '':
-                        name += ' ' + n
-                    else:
-                        name = n
-                elif n in sc_lst:
-                    if surname != '':
-                        surname += ' ' + n
-                    else:
-                        surname = n
-                else:
-                    name = lst[0]
-                    surname = lst[1:]
+    #     nc_lst = open_txt_r('names_clean.txt')
+    #     sc_lst = open_txt_r('surnames_clean.txt')
 
-    if isinstance(surname, list):
-        if len(surname) <= 3:
-            s = ''
-            for n in surname:
-                if s != '':
-                    s += ' ' + n
-                else:
-                    s = n
-    if isinstance(name, list):
-        if len(name) <= 3:
-            s = ''
-            for n in name:
-                if s != '':
-                    s += ' ' + n
-                else:
-                    s = n
+    if len(lst) == 2:
+        name = lst[0]
+        surname = lst[1]
+    elif len(lst) == 3:
+        name = lst[0]
+        surname = lst[1] + ' ' + lst[2]
+        surname_1 = ''
+        surname_2 = ''
+    else:
+        name = surname_name
+        surname = ''
+
     return name, surname
-
-
-                    # open txt files and create name and surname lists
 
 
 # function returns a 15 digit long string
