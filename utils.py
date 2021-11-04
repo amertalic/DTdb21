@@ -86,20 +86,13 @@ def name_seprator(surname_name):
     lst = surname_name.split()
     name = ''
     surname = ''
-    for char in ['ic', 'ić']:
-        if char in lst[1][-2:] and len(lst) == 2:
+    for n in ['ic', 'ić']:
+        if n in lst[1][-2:] and len(lst) == 2:
             surname = lst[1]
             name = lst[0]
-        elif char in lst[1][-2:] and len(lst) == 3:
-            surname = lst[-2:]
+        elif n in lst[1][-2:] and len(lst) == 3:
+            surname = lst[-2] + lst[-1]
             name = lst[0]
-            if lst[1] in nc_lst:
-                name += lst[1]
-            elif lst[1] in sc_lst:
-                surname = lst[1:]
-            else:
-                name = lst[:2]
-                surname = [-1]
         else:
             for n in lst:
                 if n in nc_lst:
@@ -115,6 +108,23 @@ def name_seprator(surname_name):
                 else:
                     name = lst[0]
                     surname = lst[1:]
+
+    if isinstance(surname, list):
+        if len(surname) <= 3:
+            s = ''
+            for n in surname:
+                if s != '':
+                    s += ' ' + n
+                else:
+                    s = n
+    if isinstance(name, list):
+        if len(name) <= 3:
+            s = ''
+            for n in name:
+                if s != '':
+                    s += ' ' + n
+                else:
+                    s = n
     return name, surname
 
 

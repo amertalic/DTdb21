@@ -15,6 +15,8 @@ from utils import sex_cleaner
 from utils import age_birthdate_convcerter
 # import translator
 from utils import translate
+# function separates name_surname into name and surname
+from utils import name_seprator
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -50,8 +52,6 @@ def extract_row_values():
 # runs function for extraction of values from a row in excel file
 extract_row_values()
 
-
-
 # translate these keys into english from bosnian
 for key in ['advert', 'pregnancy', 'complications', 'comments', 'coat']:
     if row_dict[key] != None:
@@ -71,6 +71,10 @@ for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'ow
         else:
             # capitalize all words
             row_dict[key] = title_string(row_dict[key])
+
+row_dict['owner_name'], row_dict['owner_surname'] = name_seprator(row_dict['owner_name'])
+
+print('TEST OUTPUT for owner name and surname:', row_dict['owner_name'], row_dict['owner_surname'])
 
 # adjust 15 digit microchip number and convert it to string
 row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
