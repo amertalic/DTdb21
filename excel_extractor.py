@@ -72,9 +72,8 @@ for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'ow
             # capitalize all words
             row_dict[key] = title_string(row_dict[key])
 
-row_dict['owner_name'], row_dict['owner_surname'] = name_seprator(row_dict['owner_name'])
-
-print('TEST OUTPUT for owner name and surname:', row_dict['owner_name'], row_dict['owner_surname'])
+# separates name and surname into 2 fields
+#row_dict['owner_name'], row_dict['owner_surname'] = name_seprator(row_dict['owner_name'])
 
 # adjust 15 digit microchip number and convert it to string
 row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
@@ -111,6 +110,6 @@ print(row_dict)
 # print value from a specific cell test correct row access
 # print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
 
-print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
-print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
-      len(str(row_dict['microchip'])))
+# print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
+# print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
+#       len(str(row_dict['microchip'])))

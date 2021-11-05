@@ -10,7 +10,7 @@ connection = psycopg2.connect(
 
 # cursor
 cursor = connection.cursor()
-
+cursor.execute("insert into dogs (owner_name, dog_name, microchip) values ('Amer', 'Belly', 023456789112345)")
 # enter data into table
 #cursor.execute("insert into Clinics (name) values ('Veterinarska stanica Ketti')")
 
