@@ -118,7 +118,7 @@ def microchip_cleaner(mchip):
             # TODO get these examples(into a sheet written appended and saved) and figure out what to do with them
             # long_microchips.append(microchip)
             return microchip
-    return microchip
+    return str(microchip)
 
 
 def weight_cleaner(wght):
@@ -128,7 +128,7 @@ def weight_cleaner(wght):
     for char in 'abcdefghijklmnopqrstuvwxyzqxšđžćč ':
         if char in weight.lower():
             weight = weight.lower().replace(char, '')
-    return float(weight)
+    return int(round(float(weight)))
 
 
 # this function appends excel spreadsheet in debug outputs when an not implemented format appears
@@ -158,9 +158,9 @@ def age_birthdate_convcerter(age, surgery_date):
     if str(age).lower() in ['odrastao', 'odrasto']:
         return 'unknown', 'grown'
     elif (isinstance(age, float) or isinstance(age, int)) == True:
-        return surgery_date - datetime.timedelta(age * 365), age
+        return surgery_date - datetime.timedelta(age * 365), str(age)
     else:
-        print('DEBUG: check age input form excel')
+        # print('DEBUG: check age input form excel')
         return 'unknown', 'grown'
 
 
@@ -171,3 +171,11 @@ def translate(text):
     else:
         translation = translators.google(text, from_language='bs', to_language='en')
     return translation
+
+# ear tag cleaner
+# in order None make NULL in order to insert into postgreSQL
+def eartag_cleaner(ear_tag):
+    if ear_tag == None:
+        return 'no stray'
+    else:
+        return str(ear_tag)

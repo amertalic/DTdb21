@@ -17,6 +17,8 @@ from utils import age_birthdate_convcerter
 from utils import translate
 # function separates name_surname into name and surname
 from utils import name_seprator
+# function converts ear_tag into string or null
+from utils import eartag_cleaner
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -41,75 +43,81 @@ row_dict = {}
 
 
 # gets values from extracted excel row and puts them to the correspondent
-def extract_row_values():
+def extract_row_values(first_line):
     # range (5,6): takes the row between = row 5 only!
-    for row in range(5, 6):
+    for row in range(5 + first_line, 6 + first_line):
         for i in range(25):
             row_dict[key_excel_list[i]] = ws[get_column_letter(i + 1) + str(row)].value
-    return row_dict
 
+        # translate these keys into english from bosnian
+        for key in ['advert', 'pregnancy', 'complications', 'comments', 'coat']:
+            if row_dict[key] != None:
+                row_dict[key] = translate(row_dict[key])
 
-# runs function for extraction of values from a row in excel file
-extract_row_values()
+        # runs function for date cleaning: surgery_date
+        row_dict['surgery_date'] = date_cleaner(row_dict['surgery_date'])
+        # runs function for date cleaning: release_date
+        row_dict['release_date'] = date_cleaner(row_dict['release_date'])
 
-# translate these keys into english from bosnian
-for key in ['advert', 'pregnancy', 'complications', 'comments', 'coat']:
-    if row_dict[key] != None:
-        row_dict[key] = translate(row_dict[key])
+        # capitalize word in a string
+        for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'owner_address']:
+            if row_dict[key] != None:
+                if key == 'owner_address':
+                    # capitalize only first word
+                    row_dict[key] = capitalize_string(row_dict[key])
+                else:
+                    # capitalize all words
+                    row_dict[key] = title_string(row_dict[key])
 
-# runs function for date cleaning: surgery_date
-row_dict['surgery_date'] = date_cleaner(row_dict['surgery_date'])
-# runs function for date cleaning: release_date
-row_dict['release_date'] = date_cleaner(row_dict['release_date'])
+        # separates name and surname into 2 fields
+        # row_dict['owner_name'], row_dict['owner_surname'] = name_seprator(row_dict['owner_name'])
 
-# capitalize word in a string
-for key in ['owner_name', 'dog_name', 'catcher', 'feeder', 'rabies_vaccine', 'owner_address']:
-    if row_dict[key] != None:
-        if key == 'owner_address':
-            # capitalize only first word
-            row_dict[key] = capitalize_string(row_dict[key])
-        else:
-            # capitalize all words
-            row_dict[key] = title_string(row_dict[key])
+        # converts ear tag into string or NULL
+        row_dict['ear_tag'] = eartag_cleaner(row_dict['ear_tag'])
 
-# separates name and surname into 2 fields
-#row_dict['owner_name'], row_dict['owner_surname'] = name_seprator(row_dict['owner_name'])
+        # adjust 15 digit microchip number and convert it to string
+        row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
+        # cleans weight to float output
+        row_dict['weight'] = weight_cleaner(row_dict['weight'])
+        # if number of fetuses is not null than converts the number to a float
+        if row_dict['fetal_number'] != None:
+            row_dict['fetal_number'] = weight_cleaner(row_dict['fetal_number'])
+            row_dict['fetal_number'] = str(row_dict['fetal_number'])
 
-# adjust 15 digit microchip number and convert it to string
-row_dict['microchip'] = microchip_cleaner(row_dict['microchip'])
+        # TODO number_month: so it has to start when a document is opened with the first monday in the month
+        #  or i onther cases where the months started.
+        #  It is probably to do it when we have all inserted in the SQL and than sort  it out.
+        # get a number in return
 
-# cleans weight to float output
-row_dict['weight'] = weight_cleaner(row_dict['weight'])
-# if number of fetuses is not null than converts the number to a float
-if row_dict['fetal_number'] != None:
-    row_dict['fetal_number'] = weight_cleaner(row_dict['fetal_number'])
+        row_dict['nb_month'] = int(weight_cleaner(row_dict['nb_month']))
 
-# TODO number_month: so it has to start when a document is opened with the first monday in the month
-#  or i onther cases where the months started.
-#  It is probably to do it when we have all inserted in the SQL and than sort  it out.
-# get a number in return
-row_dict['nb_month'] = int(weight_cleaner(row_dict['nb_month']))
+        # clean sex, and return
+        row_dict['sex'] = sex_cleaner(row_dict['sex'])
 
-# clean sex, and return
-row_dict['sex'] = sex_cleaner(row_dict['sex'])
+        # convert age to birthdate
+        # get two outputs birthdate and age
+        # if age not specified returns unknown for birthdate and grown for age
+        # the dictionary will get a new key:field row_dict['age']
+        row_dict['birthdate'], row_dict['age'] = age_birthdate_convcerter(row_dict['birthdate'],
+                                                                          row_dict['surgery_date'])
 
-# convert age to birthdate
-# get two outputs birthdate and age
-# if age not specified returns unknown for birthdate and grown for age
-# the dictionary will get a new key:field row_dict['age']
-row_dict['birthdate'], row_dict['age'] = age_birthdate_convcerter(row_dict['birthdate'], row_dict['surgery_date'])
+        row_dict['picture'] = False
+        # TEST PRINT
+        # print(row_dict)
+        # print(type(row_dict['surgery_date']))
+        # print(row_dict['owner_address'])
+        # print(row_dict['owner_name'])
+        # print(row_dict['catcher'])
 
-# TEST PRINT
-print(row_dict)
-# print(type(row_dict['surgery_date']))
-# print(row_dict['owner_address'])
-# print(row_dict['owner_name'])
-# print(row_dict['catcher'])
+        # TODO recognize which is the first row in excel file to be extracted (usually its the 5t row)
+        # print value from a specific cell test correct row access
+        # print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
 
-# TODO recognize which is the first row in excel file to be extracted (usually its the 5t row)
-# print value from a specific cell test correct row access
-# print('This ius the value from the cell A3 it must be "Ime klinike": {} \nThis is the value from cell A5 it must be the clinic name: {}'.format(ws['A3'].value, ws['A5'].value))
+        # print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
+        # print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
+        # len(str(row_dict['microchip'])))
 
-# print('WEIGHT EXTRACTED:\n', row_dict['weight'], type(row_dict['weight']))
-# print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
-#       len(str(row_dict['microchip'])))
+        return row_dict
+
+# # runs function for extraction of values from a row in excel file
+# extract_row_values(0)
