@@ -20,7 +20,7 @@ for row_number in range(9):
         f"release_date, vet_name, owner_name, owner_address, "
         f"dog_name, advert, catcher, feeder, collarid, sex, "
         f"breed, coat, weight, pregnancy, fetal_number,"
-        f"complications, rabies_vaccine, ear_tag, microchip, picture, comments, age) "
+        f"complications, rabies_vaccine, ear_tag, microchip, picture, comments, age, excel_name) "
         f"values ("
         f"'{row_dict['clinic']}', '{row_dict['nb_month']}', '{row_dict['surgery_date']}', "
         f"'{row_dict['release_date']}', '{row_dict['vet_name']}', '{row_dict['owner_name']}', "
@@ -30,10 +30,10 @@ for row_number in range(9):
         f"'{row_dict['coat']}', '{row_dict['weight']}', '{row_dict['pregnancy']}', "
         f"'{row_dict['fetal_number']}', '{row_dict['complications']}', '{row_dict['rabies_vaccine']}', "
         f"'{row_dict['ear_tag']}', '{row_dict['microchip']}', '{row_dict['picture']}', "
-        f"'{row_dict['comments']}', '{row_dict['age']}')")
+        f"'{row_dict['comments']}', '{row_dict['age']}', '{row_dict['excel_name']}')")
     # enter data into table
     # cursor.execute("insert into Clinics (name) values ('Veterinarska stanica Ketti')")
-
+    print(row_dict['excel_name'])
 # execute query
 cursor.execute("select * from dogs")
 rows = cursor.fetchall()

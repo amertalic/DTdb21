@@ -179,3 +179,8 @@ def eartag_cleaner(ear_tag):
         return 'no stray'
     else:
         return str(ear_tag)
+
+# rename name generator
+# clinic name + first date (year month day)
+def rename_file(clinic, surgery_date):
+    return clinic.replace(' ','_') + str(surgery_date).replace('-','')

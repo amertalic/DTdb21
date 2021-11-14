@@ -19,6 +19,8 @@ from utils import translate
 from utils import name_seprator
 # function converts ear_tag into string or null
 from utils import eartag_cleaner
+# function generates a name for the excel file and all entries from that excel file so its easy to go back
+from utils import rename_file
 
 # accessing excel
 wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
@@ -117,7 +119,12 @@ def extract_row_values(first_line):
         # print('MICROCHIP EXTRACTED:\n', row_dict['microchip'], type(row_dict['microchip']), 'length:',
         # len(str(row_dict['microchip'])))
 
-        return row_dict
+
+        if row == 5:
+            row_dict['excel_name'] = rename_file(row_dict['clinic'], row_dict['surgery_date'])
+            return row_dict
+        else:
+            return row_dict
 
 # # runs function for extraction of values from a row in excel file
 # extract_row_values(0)
