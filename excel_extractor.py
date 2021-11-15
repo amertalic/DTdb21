@@ -23,7 +23,7 @@ from utils import eartag_cleaner
 from utils import rename_file
 
 # accessing excel
-wb = openpyxl.load_workbook('excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
+wb = openpyxl.load_workbook('data/excel_files_folder/excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx')
 ws = wb.active
 
 # prints all sheets in excel file

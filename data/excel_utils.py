@@ -6,8 +6,10 @@ import shutil
 
 
 # moves and renames Excel file when processed
-shutil.move('../excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx',
-            '../excel_unprocessed/excel_processed_renamed/' + 'test.xlsx')
+shutil.move('excel_files_folder/excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx',
+            'excel_files_folder/excel_processed_renamed/' + 'test.xlsx')
+
+
 
 
 

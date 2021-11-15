@@ -31,8 +31,6 @@ for row_number in range(9):
         f"'{row_dict['fetal_number']}', '{row_dict['complications']}', '{row_dict['rabies_vaccine']}', "
         f"'{row_dict['ear_tag']}', '{row_dict['microchip']}', '{row_dict['picture']}', "
         f"'{row_dict['comments']}', '{row_dict['age']}', '{row_dict['excel_name']}')")
-    # enter data into table
-    # cursor.execute("insert into Clinics (name) values ('Veterinarska stanica Ketti')")
     print(row_dict['excel_name'])
 # execute query
 cursor.execute("select * from dogs")
