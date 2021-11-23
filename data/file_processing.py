@@ -11,7 +11,10 @@ for file in os.listdir(directory):
         print(os.path.join(os.getcwd(),"excel_files_folder/excel_unprocessed", filename))
         excel = pd.read_excel(os.path.join(os.getcwd(), "excel_files_folder/excel_unprocessed", filename))
 
-        print(excel)
+
+
+
+
 
 
 
