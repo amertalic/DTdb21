@@ -16,11 +16,7 @@ for row_number in range(9):
     row_dict = extract_row_values(row_number)
     # print("from pgSQL_connector", row_dict)
     cursor.execute(
-        f"insert into dogs (clinic, nb_month, surgery_date,"
-        f"release_date, vet_name, owner_name, owner_address, "
-        f"dog_name, advert, catcher, feeder, collarid, sex, "
-        f"breed, coat, weight, pregnancy, fetal_number,"
-        f"complications, rabies_vaccine, ear_tag, microchip, picture, comments, age, excel_name) "
+        f"insert into dogs (clinic, nb_month, surgery_date, release_date, vet_name, owner_name, owner_address, dog_name, advert, catcher, feeder, collarid, sex, breed, coat, weight, pregnancy, fetal_number, complications, rabies_vaccine, ear_tag, microchip, picture, comments, age, excel_name) "
         f"values ("
         f"'{row_dict['clinic']}', '{row_dict['nb_month']}', '{row_dict['surgery_date']}', "
         f"'{row_dict['release_date']}', '{row_dict['vet_name']}', '{row_dict['owner_name']}', "
