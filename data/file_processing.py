@@ -9,7 +9,12 @@ for file in os.listdir(directory):
         continue
     else:
         print(os.path.join(os.getcwd(),"excel_files_folder/excel_unprocessed", filename))
-        excel = pd.read_excel(os.path.join(os.getcwd(), "excel_files_folder/excel_unprocessed", filename))
+        try:
+            excel = pd.read_excel(os.path.join(os.getcwd(), "excel_files_folder/excel_unprocessed", filename))
+        except:
+            continue
+
+# rename file and move it to the processed folder
 
 
 

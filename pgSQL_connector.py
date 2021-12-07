@@ -13,8 +13,13 @@ connection = psycopg2.connect(
 cursor = connection.cursor()
 # loops through all rows in the excel
 for row_number in range(9):
+
     row_dict = extract_row_values(row_number)
+    if row_number == 0:
+        file_name = row_dict['clinic']+str(row_dict['surgery_date'])
+        print(file_name)
     # print("from pgSQL_connector", row_dict)
+
     cursor.execute(
         f"insert into dogs (clinic, nb_month, surgery_date,"
         f"release_date, vet_name, owner_name, owner_address, "
@@ -39,6 +44,15 @@ rows = cursor.fetchall()
 for r in rows:
     print(r, type(r))
 
+# after a all data from the xlsx file is imported into postgres
+# the file will be renamed into vet clinic + surgery_date + today's date
+# and moved renamed to the processed folder
+# to the postgres dogs table a new column will be added referencing the renamed excel file from wich the data was retrived
+
+
+# import function to move and rename excel file when finished importing
+from data.excel_utils import move_rename_xlsx
+move_rename_xlsx()
 # commit the transaction
 connection.commit()
 # close the connection
