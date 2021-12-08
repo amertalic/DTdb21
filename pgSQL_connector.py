@@ -1,5 +1,6 @@
 import psycopg2
 from excel_extractor import extract_row_values
+from datetime import datetime
 
 # connect to the db
 connection = psycopg2.connect(
@@ -15,9 +16,15 @@ cursor = connection.cursor()
 for row_number in range(9):
 
     row_dict = extract_row_values(row_number)
+
+    # crete new file name for the excel file to be renamed after processing
+    # new  file_name = clinic name + first surgery date + date and time of the time of processing
+    # so that name is unique
     if row_number == 0:
-        file_name = row_dict['clinic']+str(row_dict['surgery_date'])
-        print(file_name)
+        surgery_date = str(row_dict['surgery_date'])
+        surgery_date = surgery_date.replace('-', '') + '_'
+        clinic = row_dict['clinic'].replace(' ','') + '_'
+        file_name = clinic + surgery_date + str(datetime.now().strftime("%Y%m%d_%H%M%S"))
     # print("from pgSQL_connector", row_dict)
 
     cursor.execute(
@@ -48,7 +55,8 @@ for r in rows:
 
 # import function to move and rename excel file when finished importing
 from data.excel_utils import move_rename_xlsx
-move_rename_xlsx()
+
+move_rename_xlsx(file_name)
 # commit the transaction
 connection.commit()
 # close the connection
