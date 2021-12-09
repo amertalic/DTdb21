@@ -7,5 +7,5 @@ import shutil
 
 def move_rename_xlsx(new_name):
     # moves and renames Excel file when processed
-    shutil.move('excel_files_folder/excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx',
+    shutil.move('data/excel_files_folder/excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx',
                 'excel_files_folder/excel_processed_renamed/' + new_name + 'xlsx')

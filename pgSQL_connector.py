@@ -1,6 +1,8 @@
 import psycopg2
 from excel_extractor import extract_row_values
 from datetime import datetime
+# move and rename files
+import shutil
 
 # connect to the db
 connection = psycopg2.connect(
@@ -9,6 +11,9 @@ connection = psycopg2.connect(
     user="postgres",
     password="4545"
 )
+
+
+
 
 # cursor
 cursor = connection.cursor()
@@ -54,9 +59,13 @@ for r in rows:
 
 
 # import function to move and rename excel file when finished importing
-from data.excel_utils import move_rename_xlsx
+# after everything is extracted from excel the file is renamed
+# and moved to the folder where all processed excel files are.
 
-move_rename_xlsx(file_name)
+# moves and renames Excel file when processed
+shutil.move('data/excel_files_folder/excel_unprocessed/2021-5-PETVET-BAZA EXCEL.xlsx',
+            'data/excel_files_folder/excel_processed_renamed/' + file_name + '.xlsx')
+
 # commit the transaction
 connection.commit()
 # close the connection
